@@ -29,7 +29,6 @@ requests==2.11.1
 service-identity==14.0.0
 six==1.4.1
 Twisted==15.4.0
-vboxapi==1.0
 virtualenv==15.0.3
 w3lib==1.12.0
 Werkzeug==0.10.4
