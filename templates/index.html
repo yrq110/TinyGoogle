@@ -1,6 +1,6 @@
 
 {% extends "bootstrap/base.html" %}
-{% block title %}Tiny Google Engine{% endblock %}
+{% block title %}Tiny Google{% endblock %}
 
 {% block head %}
 {{super()}}
@@ -34,7 +34,11 @@
 
 <div class="container">
   <div class="page-header">
-    <h1>Tiny Google Engine</h1>
+    <h1>Tiny Google
+      {% if engine_name %}
+      <h5>current_engine: {{ engine_name }}</h5>
+      {% endif %}
+    </h1>
   </div>
   <div class="row" id="inputBar">
     <div class="input-group">

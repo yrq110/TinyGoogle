@@ -25,15 +25,14 @@ def query():
         # read engineID
         f = file('data/engine.json')
         s = json.load(f)
-        no = 4
-        name = 'engine_' + str(no+1)
-        cx = s['engine'][no][name]['cx']
+        no = 0
+        sn = 'engine_' + str(no+1)
+        cx = s['engine'][no][sn]['cx']
+        engine_name = s['engine'][no][sn]['name']
 
         # combine search string
         q = request.args.get('q')
 
-        # cx = "009989704776709960942:xgqpl9qptva"
-        # print type(q)
         url = "https://www.googleapis.com/customsearch/v1"
         query_string = {"key":key,"cx":cx,"num":"10","q":q}
         # print "quertstring is" + query_string
@@ -46,7 +45,7 @@ def query():
             # print json_data['error']
             error = 1
             error_msg = 'error_code:' +str(json_data['error']['code'])
-            return render_template('index.html',error=error,error_msg=error_msg)
+            return render_template('index.html',error=error,error_msg=error_msg,engine_name=engine_name)
         # current_page = json_data['queries']['request'][0]['startIndex']/10
         # next_page = current_page+1
         # engine_name = json_data['context']['title']
@@ -56,11 +55,7 @@ def query():
         items = json_data['items']
 
         for item in items:
-            result.append(item['title'])
-            result.append(item['link'])
-            result.append(item['displayLink'])
-            result.append(item['snippet'])
-            results.append(result)
+            result.append(item['title']).append(item['link']).append(item['displayLink']).append(item['snippet']).append(result)
             result =[]
         # print results
             # print ' title:' + item['title']
@@ -68,7 +63,7 @@ def query():
         # print title, link
         # return toJson(response.text)
         # return toJson(items)
-        return render_template('index.html',results=results,error=error)
+        return render_template('index.html',results=results,error=error,engine_name=engine_name)
 
 
 @app.errorhandler(404)
