@@ -15,12 +15,10 @@ lxml==3.4.4
 macholib==1.5.1
 MarkupSafe==0.23
 modulegraph==0.10.4
-numpy==1.8.0rc1
 py2app==0.7.3
 pyasn1==0.1.8
 pyasn1-modules==0.0.7
 pycparser==2.14
-pymongo==3.0.3
 pyobjc-core==2.5.1
 pyOpenSSL==0.13.1
 pyparsing==2.0.1
