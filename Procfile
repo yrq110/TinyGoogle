@@ -1,1 +1,1 @@
-web: gunicorn app --log-file -
+web: python app.py
