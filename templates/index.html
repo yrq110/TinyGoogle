@@ -1,13 +1,37 @@
 
 {% extends "bootstrap/base.html" %}
+
 {% block title %}Tiny Google{% endblock %}
 
+{% block styles %}
+  {{super()}}
+  <style>
+    #inputBar {
+      margin: 0px 30% 0px 0px;
+    }
+
+    .p {
+      padding : 20px;
+    }
+
+    .footer {
+      width: 100%;
+      margin: 0 auto;
+      background: #dff0d8;
+      bottom: 0px;
+      text-align: center;
+      /*vertical-align: middle;*/
+    }
+  </style>
+{% endblock %}
+
 {% block head %}
-{{super()}}
+  {{super()}}
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- <link type="text/css" rel="stylesheet" href="static/css/loading.css"> -->
 {% endblock %}
+
 {% block navbar %}
 <!-- <div id="navbar" class="navbar navbar-fixed-top" role="navigation">
     <div class="container">
@@ -63,6 +87,7 @@
     {% if search_info %}
       <div class="alert alert-success" role="alert">{{ search_info }}</div>
     {% endif %}
+
     {% for result in results %}
       <div id="cell" class="panel">
         {% for data in result %}
@@ -89,12 +114,11 @@
       </div>
     {% endfor %}
 
-    <div data-spy="affix" data-offset-top="60" data-offset-bottom="200">
-    </div>
+
   {% endif %}
 </div>
 
-
+{% if search_info %}
 <div class="page-turn">
   <nav>
     <ul class="pager">
@@ -103,27 +127,15 @@
     </ul>
   </nav>
 </div>
-
-<div class="footer">
-
+{% endif %}
+<div class="footer" id="footer">
+  <div class="container">
+    <br>
+    <p>Designed and built by <a href="https://github.com/yrq110" target="_blank">@yrq110</a></p>
+    <p>Powered by <a href="http://flask.pocoo.org/" target="_blank">Flask</a> and <a href="https://cse.google.com/cse/" target="_blank">Google CSE </a></p>
+    <p>Current version : v0.0.1</p>
+  </div>
 </div>
-{% endblock %}
-
-{% block styles %}
-  {{super()}}
-  <style>
-    #inputBar {
-      margin: 0px 30% 0px 0px
-    }
-
-    .p {
-      padding : 20px
-    }
-
-    .footer {
-      background-color: green
-    }
-  </style>
 {% endblock %}
 
 {% block scripts %}
@@ -132,18 +144,24 @@
 
 <script type="text/javascript">
 
+  //adjust footer bottom
+  function ct() {
+    return document.compatMode == "BackCompat" ? document.body.clientHeight : document.documentElement.clientHeight;
+  }
+  var f = document.getElementById('footer');
+  (window.onresize = function () {
+      f.style.position = document.body.scrollHeight > ct() ? '' : 'absolute';
+  })();
+
+  // search event
   $('#searchBtn').click(function() {
     var q = $('#inputField').val();
-    console.log(q)
-    console.log(q.class)
     if (q == "" || q == null || q == undefined) {
       location.href='/';
     } else {
       var string = '/query?q=' + q;
       location.href = string;
     };
-
-
   });
 
 </script>
