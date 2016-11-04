@@ -3,46 +3,12 @@
 
 {% block title %}Tiny Google{% endblock %}
 
-{% block styles %}
-  {{super()}}
-  <style>
-    #inputBar {
-      margin: 0px 30% 0px 0px;
-    }
-
-    #navbar {
-      background: #59a359
-    }
-
-    .p {
-      padding : 20px;
-    }
-
-    .footer {
-      width: 100%;
-      margin: 0 auto;
-      background: #dff0d8;
-      bottom: 0px;
-      text-align: center;
-      /*vertical-align: middle;*/
-    }
-
-    #nav_ul {
-      font-size:200%;
-    }
-
-    .nav_a {
-      color:white;
-    }
-
-  </style>
-{% endblock %}
-
 {% block head %}
   {{super()}}
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link href="/static/images/branding/google_shortcut.ico" rel="shortcut icon">
+  <link href="/static/css/index.css" type="text/css" rel="stylesheet" >
 {% endblock %}
 
 {% block navbar %}
@@ -80,13 +46,17 @@
 
     <h1> </h1>
     {% if engine_name %}
-      <h5>current engine: <span class="label label-primary">{{ engine_name }}</span></h5>
+      <h5>current engine: <span class="label label-success">{{ engine_name }}</span></h5>
     {% endif %}
   </div>
 
   <div class="row" id="inputBar" style="margin:0 20%;">
     <div class="input-group" style="text-align:center" >
-      <input id="inputField" type="text" class="form-control">
+      {% if q %}
+        <input id="inputField" type="text" class="form-control" value = {{ q }}>
+      {% else %}
+        <input id="inputField" type="text" class="form-control">
+      {% endif %}
         <span class="input-group-btn">
           <button id="searchBtn" class="btn btn-default" type="button">Go!</button>
         </span>
@@ -139,8 +109,10 @@
 <div class="page-turn">
   <nav>
     <ul class="pager">
-      <li><a href="#">Previous</a></li>
-      <li><a href="#">Next</a></li>
+      {% if has_previous %}
+      <li><a href="/query?q={{ q }}&start={{ current_start_index-10 }}">Previous</a></li>
+      {% endif %}
+      <li><a href="/query?q={{ q }}&start={{ current_start_index+10 }}">Next</a></li>
     </ul>
   </nav>
 </div>
@@ -156,35 +128,7 @@
 {% endblock %}
 
 {% block scripts %}
-{{super()}}
-<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-
-<script type="text/javascript">
-
-  //adjust footer bottom
-  function ct() {
-    return document.compatMode == "BackCompat" ? document.body.clientHeight : document.documentElement.clientHeight;
-  }
-  var f = document.getElementById('footer');
-  (window.onresize = function () {
-      f.style.position = document.body.scrollHeight > ct() ? '' : 'absolute';
-  })();
-
-  // search event
-  $('#searchBtn').click(function() {
-    var q = $('#inputField').val();
-    if (q == "" || q == null || q == undefined) {
-      location.href='/';
-    } else {
-      //parse special char
-      var  entry = { "'": "&apos;", '"': '&quot;', '<': '&lt;', '>': '&gt;' };
-      q = q.replace(/(['")-><&\\\/\.])/g, function ($0) { return entry[$0] || $0; });
-
-      var string = '/query?q=' + q;
-      location.href = string;
-    };
-  });
-
-</script>
-
+  {{super()}}
+  <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script type="text/javascript" src="/static/js/index.js"></script>
 {% endblock %}

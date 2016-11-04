@@ -1,0 +1,28 @@
+#inputBar {
+	margin: 0px 30% 0px 0px;
+}
+
+#navbar {
+	background: #59a359
+}
+
+.p {
+	padding : 20px;
+}
+
+.footer {
+	width: 100%;
+	margin: 0 auto;
+	background: #dff0d8;
+	bottom: 0px;
+	text-align: center;
+	/*vertical-align: middle;*/
+}
+
+#nav_ul {
+	font-size:200%;
+}
+
+.nav_a {
+	color:white;
+}
