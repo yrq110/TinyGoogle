@@ -18,8 +18,8 @@ def index():
 @app.route('/query/',methods=['GET'])
 def query():
     if request.method == 'GET':
+        has_result = 0
         error = 0
-        # json_data = {}
         q = request.args.get('q')
 
         # read engineID
@@ -33,65 +33,55 @@ def query():
             cx = s['engine'][i][sn]['cx']
             engine_name = s['engine'][i][sn]['name']
 
+            # search request
             url = "https://www.googleapis.com/customsearch/v1"
             query_string = {"key":key,"cx":cx,"num":"10","q":q}
-            # print "quertstring is" + query_string
             response = requests.request("GET", url, params=query_string)
             json_data = json.loads(response.text)
 
-            # print json_data
+
             try:
-                if json_data['items'] :
+                if json_data['items']:
+                    has_result = 1
                     break
             except:
-                if i == len(s['engine'])-3 :
-                    error = 1
-                    error_msg = 'error_code' +str(json_data['error']['code'])
-                    return render_template('index.html',error=error,error_msg=error_msg,engine_name=engine_name)
-                else :
-                    continue
+                try :
+                    json_data['error']
+                    if i == len(s['engine'])-3 :
+                        error = 1
+                        # print json_data
+                        error_msg = 'error_code' +str(json_data['error']['code'])
+                        return render_template('index.html',error=error,error_msg=error_msg,engine_name=engine_name)
+                    else :
+                        continue
+                except :
+                    break
 
-        # # combine search string
-        # q = request.args.get('q')
-        #
-        # url = "https://www.googleapis.com/customsearch/v1"
-        # query_string = {"key":key,"cx":cx,"num":"10","q":q}
-        # # print "quertstring is" + query_string
-        # response = requests.request("GET", url, params=query_string)
-        # json_data = json.loads(response.text)
-        #
-        # try :
-        #     items = json_data['items']
-        # except:
-        #     # print json_data['error']
-        #     error = 1
-        #     error_msg = 'error_code:' +str(json_data['error']['code'])
-        #     return render_template('index.html',error=error,error_msg=error_msg,engine_name=engine_name)
-        # current_page = json_data['queries']['request'][0]['startIndex']/10
+
         # next_page = current_page+1
         # engine_name = json_data['context']['title']
 
         # print json_data
 
-        print "have results"
-        result = []
-        results = []
-        items = json_data['items']
+        if has_result == 1 :
+            print "have results"
+            result = []
+            results = []
+            items = json_data['items']
+            current_page = json_data['queries']['request'][0]['startIndex']/10
+            print items
+            for item in items:
+                result = [item['title'],item['link'],item['displayLink'],item['snippet']]
+                results.append(result)
+                result =[]
+            print results
 
-        print items
-        for item in items:
-            result = [item['title'],item['link'],item['displayLink'],item['snippet']]
-            results.append(result)
-            result =[]
-        print results
+            search_info =  'About ' + json_data['searchInformation']['formattedTotalResults'] + ' results (' + json_data['searchInformation']['formattedSearchTime'] + ' seconds)'
 
-        search_info =  'About ' + json_data['searchInformation']['formattedTotalResults'] + ' results (' + json_data['searchInformation']['formattedSearchTime'] + ' seconds)'
-            # print ' title:' + item['title']
-        # items = json_data['item']
-        # print title, link
-        # return toJson(response.text)
-        # return toJson(items)
-        return render_template('index.html',results=results,error=error,engine_name=engine_name,search_info=search_info)
+            return render_template('index.html',results=results,error=error,engine_name=engine_name,search_info=search_info)
+        else :
+            search_info =  'About ' + json_data['searchInformation']['formattedTotalResults'] + ' results (' + json_data['searchInformation']['formattedSearchTime'] + ' seconds)'
+            return render_template('index.html',error=error,engine_name=engine_name,search_info=search_info)
 
 
 @app.errorhandler(404)

@@ -10,6 +10,10 @@
       margin: 0px 30% 0px 0px;
     }
 
+    #navbar {
+      background: #59a359
+    }
+
     .p {
       padding : 20px;
     }
@@ -22,6 +26,15 @@
       text-align: center;
       /*vertical-align: middle;*/
     }
+
+    #nav_ul {
+      font-size:200%;
+    }
+
+    .nav_a {
+      color:white;
+    }
+
   </style>
 {% endblock %}
 
@@ -29,45 +42,50 @@
   {{super()}}
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <!-- <link type="text/css" rel="stylesheet" href="static/css/loading.css"> -->
+  <link href="/static/images/branding/google_shortcut.ico" rel="shortcut icon">
 {% endblock %}
 
 {% block navbar %}
-<!-- <div id="navbar" class="navbar navbar-fixed-top" role="navigation">
+<div id="navbar" class="navbar navbar-fixed-top nav" role="navigation">
+  <a href="https://github.com/yrq110" target="_blank" style="positon:fixed"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/e7bbb0521b397edbd5fe43e7f760759336b5e05f/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f677265656e5f3030373230302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_green_007200.png"></a>
     <div class="container">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle"data-toggle="collapse" data-target=".navbar-collapse">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="/">Tiny Google Engine</a>
-        </div>
-        <div class="navbar-collapse collapse">
-            <ul class="nav navbar-nav">
-                <li><a href="/">Home</a></li>
-            </ul>
-        </div>
+      <div class="navbar-header">
+        <a class="navbar-brand nav_a" href="/">
+          Tiny Google
+        </a>
+      </div>
+      <div class="navbar-collapse collapse">
+        <ul class="nav navbar-nav" id="nav_ul">
+          <li style="background:#4285f4;"><a class="nav_a">G</a></li>
+          <li style="background:#ea4335;"><a class="nav_a">o</a></li>
+          <li style="background:#fbbd0b;"><a class="nav_a">o</a></li>
+          <li style="background:#4285f4;"><a class="nav_a">g</a></li>
+          <li style="background:#34a853;"><a class="nav_a">l</a></li>
+          <li style="background:#ea4335;"><a class="nav_a">e</a></li>
+        </ul>
+      </div>
     </div>
-</div> -->
+</div>
 {% endblock %}
 
 {% block content %}
+<br><br><br>
 <div class="container">
 
-  <a href="https://github.com/yrq110" target="_blank" style="positon:fixed"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/e7bbb0521b397edbd5fe43e7f760759336b5e05f/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f677265656e5f3030373230302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_green_007200.png"></a>
-
   <div class="page-header">
-    <h1>Tiny Google
-      {% if engine_name %}
-        <h5>current engine: <span class="label label-primary">{{ engine_name }}</span></h5>
-      {% endif %}
-    </h1>
+
+    <p style="text-align:center">
+      <img src="/static/images/branding/google_logo.png" alt="Google_logo" width=20%>
+    </p>
+
+    <h1> </h1>
+    {% if engine_name %}
+      <h5>current engine: <span class="label label-primary">{{ engine_name }}</span></h5>
+    {% endif %}
   </div>
 
-  <div class="row" id="inputBar">
-    <div class="input-group">
+  <div class="row" id="inputBar" style="margin:0 20%;">
+    <div class="input-group" style="text-align:center" >
       <input id="inputField" type="text" class="form-control">
         <span class="input-group-btn">
           <button id="searchBtn" class="btn btn-default" type="button">Go!</button>
@@ -114,11 +132,10 @@
       </div>
     {% endfor %}
 
-
   {% endif %}
 </div>
 
-{% if search_info %}
+{% if results %}
 <div class="page-turn">
   <nav>
     <ul class="pager">
@@ -159,6 +176,10 @@
     if (q == "" || q == null || q == undefined) {
       location.href='/';
     } else {
+      //parse special char
+      var  entry = { "'": "&apos;", '"': '&quot;', '<': '&lt;', '>': '&gt;' };
+      q = q.replace(/(['")-><&\\\/\.])/g, function ($0) { return entry[$0] || $0; });
+
       var string = '/query?q=' + q;
       location.href = string;
     };
