@@ -60,8 +60,9 @@
     <div class="alert alert-warning" role="alert">sorry dude,something wrong with engine......</div>
     <div class="alert alert-danger" role="alert">{{ error_msg }}</div>
   {% else %}
-
+    {% if search_info %}
     <div class="alert alert-success" role="alert">{{ search_info }}</div>
+    {% endif %}
     {% for result in results %}
       <div id="cell" class="panel">
         {% for data in result %}
