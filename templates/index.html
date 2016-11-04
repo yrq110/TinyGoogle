@@ -28,10 +28,8 @@
     </div>
 </div> -->
 {% endblock %}
+
 {% block content %}
-
-
-
 <div class="container">
 
   <a href="https://github.com/yrq110" target="_blank" style="positon:fixed"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/e7bbb0521b397edbd5fe43e7f760759336b5e05f/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f677265656e5f3030373230302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_green_007200.png"></a>
@@ -39,7 +37,7 @@
   <div class="page-header">
     <h1>Tiny Google
       {% if engine_name %}
-      <h5>current_engine: {{ engine_name }}</h5>
+        <h5>current engine: <span class="label label-primary">{{ engine_name }}</span></h5>
       {% endif %}
     </h1>
   </div>
@@ -59,9 +57,11 @@
 
     <div class="alert alert-warning" role="alert">sorry dude,something wrong with engine......</div>
     <div class="alert alert-danger" role="alert">{{ error_msg }}</div>
+
   {% else %}
+
     {% if search_info %}
-    <div class="alert alert-success" role="alert">{{ search_info }}</div>
+      <div class="alert alert-success" role="alert">{{ search_info }}</div>
     {% endif %}
     {% for result in results %}
       <div id="cell" class="panel">
@@ -89,29 +89,39 @@
       </div>
     {% endfor %}
 
+    <div data-spy="affix" data-offset-top="60" data-offset-bottom="200">
+    </div>
   {% endif %}
 </div>
+
+
+<div class="page-turn">
+  <nav>
+    <ul class="pager">
+      <li><a href="#">Previous</a></li>
+      <li><a href="#">Next</a></li>
+    </ul>
+  </nav>
+</div>
+
+<div class="footer">
+
+</div>
 {% endblock %}
+
 {% block styles %}
   {{super()}}
   <style>
-    #r_title {
-        #font-size : large
-    }
-
-    #r_link {
-
-    }
-    #r_snippet {
-
-    }
-
     #inputBar {
-        margin: 0px 50% 0px 0px
+      margin: 0px 30% 0px 0px
     }
 
     .p {
       padding : 20px
+    }
+
+    .footer {
+      background-color: green
     }
   </style>
 {% endblock %}
