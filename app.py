@@ -75,13 +75,9 @@ def query():
                 search_info =  "Page " + str(current_start_index/10+1) + ' of About ' + json_data['searchInformation']['formattedTotalResults'] + ' results (' + json_data['searchInformation']['formattedSearchTime'] + ' seconds)'
             print items
             for item in items:
-                result = {"title" : item['title'],"link" : item['link'],"displayLink" : item['displayLink'],"snippet" : item['snippet']}
+                result = {"title" : item['htmlTitle'],"link" : item['link'],"displayLink" : item['htmlFormattedUrl'],"snippet" : item['htmlSnippet']}
                 results.append(result)
                 result = {}
-            # print results
-
-
-
             return render_template('index.html',q=q,results=results,error=error,engine_name=engine_name,search_info=search_info,has_previous=has_previous,current_start_index=current_start_index)
         else :
             search_info =  'About ' + json_data['searchInformation']['formattedTotalResults'] + ' results (' + json_data['searchInformation']['formattedSearchTime'] + ' seconds)'

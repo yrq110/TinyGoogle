@@ -67,7 +67,7 @@
 
   {% if error %}
 
-    <div class="alert alert-warning" role="alert">sorry dude,something wrong with engine......</div>
+    <div class="alert alert-warning" role="alert">sorry dude,there is no available engine......</div>
     <div class="alert alert-danger" role="alert">{{ error_msg }}</div>
 
   {% else %}
@@ -79,13 +79,13 @@
     {% for result in results %}
       <div id="cell" class="panel">
 
-        <div id="r_title">
-          <a href="{{ data }}" target="_blank" ><h2>{{ result.title }}</h2></a>
-        </div>
+        <!-- <div id="r_title"> -->
+            <a href = {{ result.link }} target="_blank" ><h3>{{ result.title|safe }}</h3></a>
+        <!-- </div> -->
 
-        <p id="r_link">{{ result.link }}</p>
+        <p id="r_link">{{ result.displayLink|safe }}</p>
 
-        <p id="r_snippet">{{ result.snippet }}</p>
+        <p id="r_snippet">{{ result.snippet|safe }}</p>
       </div>
     {% endfor %}
 
@@ -94,6 +94,18 @@
 
 {% if results %}
 <div class="page-turn">
+  <!-- <div id="navcnt">
+    <table style="border-collapse:collapse;text-align:left;margin:30px auto 30px" id="pager" role="presentation">
+      <tbody>
+        <tr valign="top">
+          <td class="previous"><a href="#"><span style="height:40px; display:block;  background:url(/static/images/branding/nav_logo.png) no-repeat;background-position:0 0;width:53px;float:right"></span><span style="display:block;margin-right:35px;clear:right;">previous</span></a></td>
+          <td></td>
+          <td class="cur"></td>
+          <td class="next"></td>
+        </tr>
+      </tbody>
+    </table>
+  </div> -->
   <nav>
     <ul class="pager">
       {% if has_previous %}
@@ -104,6 +116,7 @@
   </nav>
 </div>
 {% endif %}
+
 <div class="footer" id="footer">
   <div class="container">
     <br>
@@ -116,6 +129,5 @@
 
 {% block scripts %}
   {{super()}}
-  <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
   <script type="text/javascript" src="/static/js/index.js"></script>
 {% endblock %}
