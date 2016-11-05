@@ -26,7 +26,7 @@ def query():
         f = file('data/engine.json')
         s = json.load(f)
 
-        for i in range(len(s['engine'])-2) :
+        for i in range(len(s['engine'])-1) :
             sn = 'engine_' + str(i+1)
             key = s['engine'][i][sn]['key']
             cx = s['engine'][i][sn]['cx']
@@ -50,7 +50,7 @@ def query():
                 # case 2: error
                 try :
                     json_data['error']
-                    if i == len(s['engine'])-3 :
+                    if i == len(s['engine'])-2 :
                         error = 1
                         # print json_data
                         error_msg = 'error_code' +str(json_data['error']['code'])
@@ -75,9 +75,9 @@ def query():
                 search_info =  "Page " + str(current_start_index/10+1) + ' of About ' + json_data['searchInformation']['formattedTotalResults'] + ' results (' + json_data['searchInformation']['formattedSearchTime'] + ' seconds)'
             print items
             for item in items:
-                result = [item['title'],item['link'],item['displayLink'],item['snippet']]
+                result = {"title" : item['title'],"link" : item['link'],"displayLink" : item['displayLink'],"snippet" : item['snippet']}
                 results.append(result)
-                result =[]
+                result = {}
             # print results
 
 

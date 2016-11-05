@@ -78,27 +78,14 @@
 
     {% for result in results %}
       <div id="cell" class="panel">
-        {% for data in result %}
 
-          {% if loop.index == 1 %}
-            {% set title = data %}
-          {% endif %}
+        <div id="r_title">
+          <a href="{{ data }}" target="_blank" ><h2>{{ result.title }}</h2></a>
+        </div>
 
-          {% if loop.index == 2 %}
-            {% set href = data %}
-            <div id="r_title">
-              <a href="{{ data }}" target="_blank" ><h2>{{ title }}</h2></a>
-            </div>
-          {% endif %}
+        <p id="r_link">{{ result.link }}</p>
 
-          {% if loop.index == 3 %}
-            <p id="r_link">{{ data }}</p>
-          {% endif %}
-
-          {% if loop.index == 4 %}
-            <p id="r_snippet">{{ data }}</p>
-          {% endif %}
-        {% endfor %}
+        <p id="r_snippet">{{ result.snippet }}</p>
       </div>
     {% endfor %}
 
@@ -121,7 +108,7 @@
   <div class="container">
     <br>
     <p>Designed and built by <a href="https://github.com/yrq110" target="_blank">@yrq110</a></p>
-    <p>Powered by <a href="http://flask.pocoo.org/" target="_blank">Flask</a> and <a href="https://cse.google.com/cse/" target="_blank">Google CSE </a></p>
+    <p>Powered by  <a href="https://cse.google.com/cse/" target="_blank">Google CSE </a> , <a href="http://flask.pocoo.org/" target="_blank">Flask</a> and <a href="http://getbootstrap.com/" target="_blank">Bootstrap</a></p>
     <p>Current version : v0.0.1</p>
   </div>
 </div>
