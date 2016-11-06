@@ -67,6 +67,8 @@ def query():
             results = []
             items = json_data['items']
             current_start_index = json_data['queries']['request'][0]['startIndex']
+            page_index = (current_start_index-1)/10+1
+            # print "page is : " + str(page_index)
             if current_start_index == 1 :
                 has_previous = 0
                 search_info =  'About ' + json_data['searchInformation']['formattedTotalResults'] + ' results (' + json_data['searchInformation']['formattedSearchTime'] + ' seconds)'
@@ -78,7 +80,7 @@ def query():
                 result = {"title" : item['htmlTitle'],"link" : item['link'],"displayLink" : item['htmlFormattedUrl'],"snippet" : item['htmlSnippet']}
                 results.append(result)
                 result = {}
-            return render_template('index.html',q=q,results=results,error=error,engine_name=engine_name,search_info=search_info,has_previous=has_previous,current_start_index=current_start_index)
+            return render_template('index.html',q=q,results=results,error=error,engine_name=engine_name,search_info=search_info,has_previous=has_previous,current_start_index=current_start_index,page_index=page_index)
         else :
             search_info =  'About ' + json_data['searchInformation']['formattedTotalResults'] + ' results (' + json_data['searchInformation']['formattedSearchTime'] + ' seconds)'
             return render_template('index.html',q=q,error=error,engine_name=engine_name,search_info=search_info)

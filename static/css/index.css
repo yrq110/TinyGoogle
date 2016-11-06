@@ -27,3 +27,9 @@
 .nav_a {
 	color:white;
 }
+
+
+td {
+	display: table-cell;
+	vertical-align: inherit;
+}

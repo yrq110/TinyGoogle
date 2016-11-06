@@ -93,6 +93,27 @@
 </div>
 
 {% if results %}
+<div class="navcnt">
+  <table style="border-collapse:collapse;text-align:left;margin:30px auto 30px" id="pager" role="presentation">
+    <tbody>
+      <tr valign="top">
+        {% if has_previous %}
+          <td class="previous"><a href="/query?q={{ q }}&start={{ current_start_index-10 }}"><span style="height:40px;display:block;background:url(/static/images/branding/nav_logo.png) no-repeat;background-position:0 0;width:53px;float:right"></span><span style="display:block;clear:right;">previous</span></a></td>
+        {% else %}
+          <td class="previous"><span style="height:40px;display:block;background:url(/static/images/branding/nav_logo.png) no-repeat;background-position:-24px 0;width:28px;float:right;"></span><span style="display:block;clear:right"></span></td>
+        {% endif %}
+        <!-- <td class="cur" style="display: table-cell;
+      	vertical-align: inherit;"><span style="height:40px;display:block;background:url(/static/images/branding/nav_logo.png) no-repeat;background-position:-53px 0;width:20px"></span>"1"</td> -->
+        <td><span style="height:40px;display:block;background:url(/static/images/branding/nav_logo.png) no-repeat;background-position:-53px 0;width:20px;"></span></td>
+        <td><span style="height:40px;display:block;background:url(/static/images/branding/nav_logo.png) no-repeat;background-position:-74px 0;width:20px;"></span>Page {{ page_index }}</td>
+        <td class="next"><a href="/query?q={{ q }}&start={{ current_start_index+10 }}"><span style="height:40px;display:block;background:url(/static/images/branding/nav_logo.png) no-repeat;background-position:-96px 0;width:71px;float:right;"></span><span style="display:block;clear:right;margin-left:50px;">next</span></a></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+{% endif %}
+
+{% if results %}
 <div class="page-turn">
   <!-- <div id="navcnt">
     <table style="border-collapse:collapse;text-align:left;margin:30px auto 30px" id="pager" role="presentation">
@@ -106,14 +127,14 @@
       </tbody>
     </table>
   </div> -->
-  <nav>
+  <!-- <nav>
     <ul class="pager">
       {% if has_previous %}
       <li><a href="/query?q={{ q }}&start={{ current_start_index-10 }}">Previous</a></li>
       {% endif %}
       <li><a href="/query?q={{ q }}&start={{ current_start_index+10 }}">Next</a></li>
     </ul>
-  </nav>
+  </nav> -->
 </div>
 {% endif %}
 
