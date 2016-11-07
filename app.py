@@ -26,7 +26,7 @@ def query():
         f = file('data/engine.json')
         s = json.load(f)
 
-        for i in range(len(s['engine'])-1) :
+        for i in range(len(s['engine'])) :
             sn = 'engine_' + str(i+1)
             key = s['engine'][i][sn]['key']
             cx = s['engine'][i][sn]['cx']
@@ -50,7 +50,7 @@ def query():
                 # case 2: error
                 try :
                     json_data['error']
-                    if i == len(s['engine'])-2 :
+                    if i == len(s['engine'])-1:
                         error = 1
                         # print json_data
                         error_msg = 'error_code' +str(json_data['error']['code'])
