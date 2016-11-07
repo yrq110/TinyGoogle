@@ -6,10 +6,11 @@ TinyGoogle built with Flask + Bootstrap + Google CSE
   <a href="http://tinygoo.herokuapp.com/" target="\_blank">
     <img src="https://github.com/yrq110/TinyGoogle/blob/master/static/images/readme/demo.png" width="700px">
 		<br>
-    <center><h3>Live Demo</h3></center>
+
   </a>
 </p>
 
+<center><h3>[Live Demo](http://tinygoo.herokuapp.com/)</h3></center>
 > Note: the demo may need some spin up time if nobody has accessed it for a certain period.
 
 ## Features
@@ -20,10 +21,12 @@ TinyGoogle built with Flask + Bootstrap + Google CSE
 ## Build Setup
 
 1. install requirements
+
   ```bash
   pip install -r requirements.txt
   ```
 2. run
+
   ```bash
   python app.py
   # server at http://127.0.0.1:5000
