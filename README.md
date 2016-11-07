@@ -58,3 +58,7 @@ TinyGoogle built with Flask + Bootstrap + Google CSE
 ## Todo
 
 * page-content-minigame(just like doodle)
+
+## License
+
+Windless is licensed under [MIT](http://opensource.org/licenses/MIT)

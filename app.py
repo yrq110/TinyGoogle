@@ -7,10 +7,6 @@ import requests
 app = Flask(__name__)
 bootstrap = Bootstrap(app)
 
-def toJson(data):
-    line = json.dumps(data)
-    return line
-
 @app.route('/')
 def index():
     return render_template('index.html',name='index')
