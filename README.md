@@ -61,4 +61,4 @@ TinyGoogle built with Flask + Bootstrap + Google CSE
 
 ## License
 
-Windless is licensed under [MIT](http://opensource.org/licenses/MIT)
+TinyGoogle is licensed under [MIT](http://opensource.org/licenses/MIT)
