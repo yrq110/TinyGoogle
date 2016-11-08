@@ -2,15 +2,15 @@
 
 TinyGoogle built with Flask + Bootstrap + Google CSE
 
+<h3 align="center">Live Demo: http://tinygoo.herokuapp.com</h3>
+
 <p align="center">
   <a href="http://tinygoo.herokuapp.com/" target="\_blank">
     <img src="https://github.com/yrq110/TinyGoogle/blob/master/static/images/readme/demo.png" width="700px">
-		<br>
-
   </a>
 </p>
 
-<center><h3>[Live Demo](http://tinygoo.herokuapp.com/)</h3></center>
+
 > Note: the demo may need some spin up time if nobody has accessed it for a certain period.
 
 ## Features
