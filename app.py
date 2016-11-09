@@ -37,12 +37,12 @@ def query():
             response = requests.request("GET", url, params=query_string)
             json_data = json.loads(response.text)
 
-            try:
+            try :
                 # case 1: has results
                 if json_data['items']:
                     has_result = 1
                     break
-            except:
+            except :
                 # case 2: error
                 try :
                     json_data['error']
@@ -73,7 +73,14 @@ def query():
                 search_info =  "Page " + str(current_start_index/10+1) + ' of About ' + json_data['searchInformation']['formattedTotalResults'] + ' results (' + json_data['searchInformation']['formattedSearchTime'] + ' seconds)'
             print items
             for item in items:
-                result = {"title" : item['htmlTitle'],"link" : item['link'],"displayLink" : item['htmlFormattedUrl'],"snippet" : item['htmlSnippet']}
+                result = {"title" : item['htmlTitle'], "link" : item['link'], "displayLink" : item['htmlFormattedUrl'], "snippet" : item['htmlSnippet']}
+                try :
+                    if item['pagemap'].has_key('cse_thumbnail') :
+                        print item['pagemap']['cse_thumbnail'][0]
+                        result["thumbnail"] = item['pagemap']['cse_thumbnail'][0]
+                        result["thumbnail"]["height"] = int(item['pagemap']['cse_thumbnail'][0]['height'])
+                except Exception,e:
+                    print Exception,":",e
                 results.append(result)
                 result = {}
             return render_template('index.html',q=q,results=results,error=error,engine_name=engine_name,search_info=search_info,has_previous=has_previous,current_start_index=current_start_index,page_index=page_index)

@@ -37,7 +37,7 @@
 
 {% block content %}
 <br><br><br>
-<div class="container">
+<div class="container" id="content">
 
   <div class="page-header">
 
@@ -78,16 +78,29 @@
     {% endif %}
 
     {% for result in results %}
-      <div id="cell" class="panel">
 
-        <!-- <div id="r_title"> -->
-            <a href = {{ result.link }} target="_blank" ><h3>{{ result.title|safe }}</h3></a>
-        <!-- </div> -->
-
-        <p id="r_link">{{ result.displayLink|safe }}</p>
-
-        <p id="r_snippet">{{ result.snippet|safe }}</p>
+      {% if result.thumbnail %}
+      <div class="panel container">
+        <h2><a href = {{ result.link }} target="_blank" >{{ result.title|safe }}</a></h2>
+        <div>
+          <div style="float:left; width:{{ result.thumbnail.width}}px;">
+              <img src = {{ result.thumbnail.src }} alt="thumbnail"/>
+          </div>
+          <div style="float:left;height:{{ result.thumbnail.height }}px;position:relative;">
+            <div id="r_snippet" style="margin-left:20px;margin-top:{{ result.thumbnail.height/4 }}px;font-size:20px;">{{ result.snippet|safe }}</div>
+            <div id="r_link" style="margin-left:20px;bottom:0;font-size:13px;position:absolute;">{{ result.displayLink|safe }}</div>
+            <!-- <p id="r_snippet">{{ result.snippet|safe }}</p>
+            <p id="r_link">{{ result.displayLink|safe }}</p> -->
+          </div>
+        </div>
       </div>
+      {% else %}
+      <div class="panel container">
+        <a href = {{ result.link }} target="_blank" ><h3>{{ result.title|safe }}</h3></a>
+        <p id="r_snippet" style="font-size:18px;">{{ result.snippet|safe }}</p>
+        <p id="r_link" style="font-size:13px;">{{ result.displayLink|safe }}</p>
+      </div>
+      {% endif%}
     {% endfor %}
 
   {% endif %}
@@ -114,30 +127,6 @@
 </div>
 {% endif %}
 
-{% if results %}
-<div class="page-turn">
-  <!-- <div id="navcnt">
-    <table style="border-collapse:collapse;text-align:left;margin:30px auto 30px" id="pager" role="presentation">
-      <tbody>
-        <tr valign="top">
-          <td class="previous"><a href="#"><span style="height:40px; display:block;  background:url(/static/images/branding/nav_logo.png) no-repeat;background-position:0 0;width:53px;float:right"></span><span style="display:block;margin-right:35px;clear:right;">previous</span></a></td>
-          <td></td>
-          <td class="cur"></td>
-          <td class="next"></td>
-        </tr>
-      </tbody>
-    </table>
-  </div> -->
-  <!-- <nav>
-    <ul class="pager">
-      {% if has_previous %}
-      <li><a href="/query?q={{ q }}&start={{ current_start_index-10 }}">Previous</a></li>
-      {% endif %}
-      <li><a href="/query?q={{ q }}&start={{ current_start_index+10 }}">Next</a></li>
-    </ul>
-  </nav> -->
-</div>
-{% endif %}
 <!-- <script src='/static/js/piko.js'></script> -->
 
 <div class="footer" id="footer">
@@ -152,7 +141,10 @@
 {% block scripts %}
   {{super()}}
   <script type="text/javascript" src="/static/js/index.js"></script>
-
-
+  <script type="text/javascript">
+  $(document).ready(function () {
+    // $("#content").empty();
+  });
+  </script>
 
 {% endblock %}
