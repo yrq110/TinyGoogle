@@ -10,13 +10,26 @@ TinyGoogle built with Flask + Bootstrap + Google CSE
   </a>
 </p>
 
-
 > Note: the demo may need some spin up time if nobody has accessed it for a certain period.
 
 ## Features
 
 * Search content by Google Custom Search API
-* Ignore gfw to use google search
+* Ignore [GFW](https://en.wikipedia.org/wiki/Great_Firewall) to use google search
+
+## Search Times
+
+There are 4 engines in this demo. Each engine can search 100 times/day.
+
+If the demo run out of search times when you use, please try just another day.
+
+## Requirements
+
+* python 2.7.10 (haven't port to python3 yet)
+* flask 0.10.1
+* gunicorn 19.6.0
+* requests 2.11.1
+* flask-bootstrap 3.3.7.0
 
 ## Build Setup
 

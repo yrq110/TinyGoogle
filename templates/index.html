@@ -68,7 +68,7 @@
 
   {% if error %}
 
-    <div class="alert alert-warning" role="alert">sorry dude,there is no available engine......</div>
+    <div class="alert alert-warning" role="alert">sorry dude, today's search times was used up, pls try tomorrow</div>
     <div class="alert alert-danger" role="alert">{{ error_msg }}</div>
 
   {% else %}
@@ -87,33 +87,33 @@
       <!-- md&lg-only -->
       <div class="panel container visible-lg-block visible-md-block">
         <h3><a href = {{ result.link }} target="_blank" >{{ result.title|safe }}</a></h3>
-      {% if result.snippet %}
-        {% if result.thumbnail %}
-          <div>
-            <div id="{{ result.title }}_tn" style="float:left; width:{{ result.thumbnail.width}}px;">
-                <a href="{{ result.link }}" target="_blank"><img style="" src={{ result.thumbnail.src }} alt="thumbnail"/></a>
+        {% if result.snippet %}
+          {% if result.thumbnail %}
+            <div>
+              <div id="{{ result.title }}_tn" style="float:left; width:{{ result.thumbnail.width}}px;">
+                  <a href="{{ result.link }}" target="_blank"><img style="" src={{ result.thumbnail.src }} alt="thumbnail"/></a>
+              </div>
+              <div id="{{ result.title }}_content" style="float:left;height:{{ result.thumbnail.height }}px;position:relative;">
+                <div id="r_snippet" style="margin-left:20px;margin-top:20px;font-size:20px;">{{ result.snippet|safe }}</div>
+                <div id="r_link" style="margin-left:20px;bottom:0;font-size:13px;position:absolute;">{{ result.displayLink|safe }}</div>
+              </div>
+              <script type="text/javascript">
+                // var height = document.getElementById('{{ result.title }}_tn').clientHeight > (document.getElementById('{{ result.title }}_snippet').clientHeight + document.getElementById('r_link').clientHeight + 20) ? document.getElementById('{{ result.title }}_tn').clientHeight : document.getElementById('r_snippet').clientHeight + document.getElementById('{{ result.title }}_link').clientHeight + 20;
+                // console.log("height" + height);
+                // document.getElementById('{{ result.title }}_tn').style.height = height + "px";
+                // document.getElementById('{{ result.title }}_content').style.height = height + "px";
+              </script>
             </div>
-            <div id="{{ result.title }}_content" style="float:left;height:{{ result.thumbnail.height }}px;position:relative;">
-              <div id="r_snippet" style="margin-left:20px;margin-top:20px;font-size:20px;">{{ result.snippet|safe }}</div>
-              <div id="r_link" style="margin-left:20px;bottom:0;font-size:13px;position:absolute;">{{ result.displayLink|safe }}</div>
-            </div>
-            <script type="text/javascript">
-              // var height = document.getElementById('{{ result.title }}_tn').clientHeight > (document.getElementById('{{ result.title }}_snippet').clientHeight + document.getElementById('r_link').clientHeight + 20) ? document.getElementById('{{ result.title }}_tn').clientHeight : document.getElementById('r_snippet').clientHeight + document.getElementById('{{ result.title }}_link').clientHeight + 20;
-              // console.log("height" + height);
-              // document.getElementById('{{ result.title }}_tn').style.height = height + "px";
-              // document.getElementById('{{ result.title }}_content').style.height = height + "px";
-            </script>
-          </div>
+          {% else %}
+            <div id="r_snippet" style="font-size:18px;text">{{ result.snippet|safe }}</div>
+            <div id="r_link" style="font-size:13px;color:#008000">{{ result.displayLink|safe }}</div>
+          {% endif %}
         {% else %}
-          <div id="r_snippet" style="font-size:18px;text">{{ result.snippet|safe }}</div>
           <div id="r_link" style="font-size:13px;color:#008000">{{ result.displayLink|safe }}</div>
-        {% endif %}
-      {% else %}
-        <div id="r_link" style="font-size:13px;color:#008000">{{ result.displayLink|safe }}</div>
-        <div id="r_tn" style="width:{{ result.thumbnail.width}}px;">
-            <a href="{{ result.link }}" target="_blank"><img src = {{ result.thumbnail.src }} alt="thumbnail"/></a>
-        </div>
-      {% endif%}
+          <div id="r_tn" style="width:{{ result.thumbnail.width}}px;">
+              <a href="{{ result.link }}" target="_blank"><img src = {{ result.thumbnail.src }} alt="thumbnail"/></a>
+          </div>
+        {% endif%}
       </div>
     {% endfor %}
 
