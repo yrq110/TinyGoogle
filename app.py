@@ -80,7 +80,7 @@ def query():
                         result["thumbnail"] = item['pagemap']['cse_thumbnail'][0]
                         result["thumbnail"]["height"] = int(item['pagemap']['cse_thumbnail'][0]['height'])
                 except Exception,e:
-                    # print Exception,":",e
+                    print Exception,":",e
                 results.append(result)
                 result = {}
             return render_template('index.html',q=q,results=results,error=error,engine_name=engine_name,search_info=search_info,has_previous=has_previous,current_start_index=current_start_index,page_index=page_index)
