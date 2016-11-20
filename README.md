@@ -25,10 +25,10 @@ If the demo run out of search times when you use, please try just another day.
 
 ## Requirements
 
-* python 2.7.10 (haven't port to python3 yet)
-* flask 0.10.1
+* python 3.5
+* flask 0.11.1
 * gunicorn 19.6.0
-* requests 2.11.1
+* requests 2.12.1
 * flask-bootstrap 3.3.7.0
 
 ## Build Setup
@@ -39,12 +39,6 @@ If the demo run out of search times when you use, please try just another day.
   pip install -r requirements.txt
   ```
 2. run
-
-  ```bash
-  python app.py
-  # server at http://127.0.0.1:5000
-  ```
-  or
 
   ```bash
   gunicorn app:app  
@@ -70,7 +64,9 @@ If the demo run out of search times when you use, please try just another day.
 
 ## Todo
 
-* page-content-minigame(just like doodle)
+* -[x] update to python3
+* -[x] thumbnail switch
+* -[ ] doodle
 
 ## License
 

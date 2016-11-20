@@ -1,6 +1,6 @@
 # -*- coding:utf-8 -*-
 from flask import Flask, request, render_template
-from flask.ext.bootstrap import Bootstrap
+from flask_bootstrap import Bootstrap
 import json, sys
 import requests
 
@@ -19,7 +19,7 @@ def query():
         q = request.args.get('q')
         start_index = request.args.get('start')
         # read engineID
-        f = file('data/engine.json')
+        f = open('data/engine.json')
         s = json.load(f)
 
         for i in range(len(s['engine'])) :
@@ -71,16 +71,19 @@ def query():
             else :
                 has_previous = 1
                 search_info =  "Page " + str(current_start_index/10+1) + ' of About ' + json_data['searchInformation']['formattedTotalResults'] + ' results (' + json_data['searchInformation']['formattedSearchTime'] + ' seconds)'
-            print items
+            # print(items)
             for item in items:
                 result = {"title" : item['htmlTitle'], "link" : item['link'], "displayLink" : item['htmlFormattedUrl'], "snippet" : item['htmlSnippet']}
-                try :
-                    if item['pagemap'].has_key('cse_thumbnail') :
-                        # print item['pagemap']['cse_thumbnail'][0]
+                for k in item['pagemap'].keys():
+                    # print(typeof(k))
+                    if k == 'cse_thumbnail' :
+                        print('has thumbnail!')
                         result["thumbnail"] = item['pagemap']['cse_thumbnail'][0]
                         result["thumbnail"]["height"] = int(item['pagemap']['cse_thumbnail'][0]['height'])
-                except Exception,e:
-                    print Exception,":",e
+                    # print(type(k))
+                # if ('cse_thmbnail' in item['pagemap'].keys()):
+                #     result["thumbnail"] = item['pagemap']['cse_thumbnail'][0]
+                #     result["thumbnail"]["height"] = int(item['pagemap']['cse_thumbnail'][0]['height'])
                 results.append(result)
                 result = {}
             return render_template('index.html',q=q,results=results,error=error,engine_name=engine_name,search_info=search_info,has_previous=has_previous,current_start_index=current_start_index,page_index=page_index)

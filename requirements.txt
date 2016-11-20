@@ -1,5 +1,5 @@
 
-Flask==0.10.1
+Flask==0.11.1
 gunicorn==19.6.0
-requests
-flask-bootstrap
+requests==2.12.1
+flask-bootstrap==3.3.7.0

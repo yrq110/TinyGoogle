@@ -45,10 +45,14 @@
       <img src="/static/images/branding/google_logo.png" alt="Google_logo" width=20%>
     </p>
 
-    <h1> </h1>
     {% if engine_name %}
-      <h5>current engine: <span class="label label-success">{{ engine_name }}</span></h5>
+    <div style="display: inline;">current engine: <span class="label label-success">{{ engine_name }}</span></div>
     {% endif %}
+
+    <button class="btn btn-success" id="thumb-btn" type="button" style="float:right;">
+       Display thumbnail : On
+    </button>
+
   </div>
 
   <div class="row" id="inputBar" style="margin:0 20%;">
@@ -97,12 +101,6 @@
                 <div id="r_snippet" style="margin-left:20px;margin-top:20px;font-size:20px;">{{ result.snippet|safe }}</div>
                 <div id="r_link" style="margin-left:20px;bottom:0;font-size:13px;position:absolute;">{{ result.displayLink|safe }}</div>
               </div>
-              <script type="text/javascript">
-                // var height = document.getElementById('{{ result.title }}_tn').clientHeight > (document.getElementById('{{ result.title }}_snippet').clientHeight + document.getElementById('r_link').clientHeight + 20) ? document.getElementById('{{ result.title }}_tn').clientHeight : document.getElementById('r_snippet').clientHeight + document.getElementById('{{ result.title }}_link').clientHeight + 20;
-                // console.log("height" + height);
-                // document.getElementById('{{ result.title }}_tn').style.height = height + "px";
-                // document.getElementById('{{ result.title }}_content').style.height = height + "px";
-              </script>
             </div>
           {% else %}
             <div id="r_snippet" style="font-size:18px;text">{{ result.snippet|safe }}</div>
@@ -130,8 +128,6 @@
         {% else %}
           <td class="previous"><span style="height:40px;display:block;background:url(/static/images/branding/nav_logo.png) no-repeat;background-position:-24px 0;width:28px;float:right;"></span><span style="display:block;clear:right"></span></td>
         {% endif %}
-        <!-- <td class="cur" style="display: table-cell;
-      	vertical-align: inherit;"><span style="height:40px;display:block;background:url(/static/images/branding/nav_logo.png) no-repeat;background-position:-53px 0;width:20px"></span>"1"</td> -->
         <td><span style="height:40px;display:block;background:url(/static/images/branding/nav_logo.png) no-repeat;background-position:-53px 0;width:20px;"></span></td>
         <td><span style="height:40px;display:block;background:url(/static/images/branding/nav_logo.png) no-repeat;background-position:-74px 0;width:20px;"></span>Page {{ page_index }}</td>
         <td class="next"><a href="/query?q={{ q }}&start={{ current_start_index+10 }}"><span style="height:40px;display:block;background:url(/static/images/branding/nav_logo.png) no-repeat;background-position:-96px 0;width:71px;float:right;"></span><span style="display:block;clear:right;margin-left:50px;">next</span></a></td>
