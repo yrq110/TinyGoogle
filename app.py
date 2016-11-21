@@ -1,6 +1,6 @@
 # -*- coding:utf-8 -*-
 from flask import Flask, request, render_template
-from flask_bootstrap import Bootstrap
+from flask.ext.bootstrap import Bootstrap
 import json, sys
 import requests
 
@@ -74,12 +74,15 @@ def query():
             # print(items)
             for item in items:
                 result = {"title" : item['htmlTitle'], "link" : item['link'], "displayLink" : item['htmlFormattedUrl'], "snippet" : item['htmlSnippet']}
-                for k in item['pagemap'].keys():
-                    # print(typeof(k))
-                    if k == 'cse_thumbnail' :
-                        print('has thumbnail!')
-                        result["thumbnail"] = item['pagemap']['cse_thumbnail'][0]
-                        result["thumbnail"]["height"] = int(item['pagemap']['cse_thumbnail'][0]['height'])
+                try :
+                    for k in item['pagemap'].keys() :
+                        # print(typeof(k))
+                        if k == 'cse_thumbnail' :
+                            print('has thumbnail!')
+                            result["thumbnail"] = item['pagemap']['cse_thumbnail'][0]
+                            result["thumbnail"]["height"] = int(item['pagemap']['cse_thumbnail'][0]['height'])
+                except Exception as e:
+                    print('%s : %s' % (Exception,e))
                     # print(type(k))
                 # if ('cse_thmbnail' in item['pagemap'].keys()):
                 #     result["thumbnail"] = item['pagemap']['cse_thumbnail'][0]
