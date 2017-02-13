@@ -6,7 +6,7 @@ TinyGoogle built with Flask + Bootstrap + Google CSE
 
 <p align="center">
   <a href="http://tinygoo.herokuapp.com/" target="\_blank">
-    <img src="https://github.com/yrq110/TinyGoogle/blob/master/static/images/readme/demo.png" width="700px">
+    <img src="https://github.com/yrq110/TinyGoogle/blob/master/static/images/readme/main_page_screenshot.png" width="700px">
   </a>
 </p>
 
